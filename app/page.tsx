@@ -1,3 +1,4 @@
+import Categories from "./_components/categories";
 import Header from "./_components/header";
 import Search from "./_components/search";
 
@@ -6,6 +7,7 @@ export default function Home() {
     <>
       <Header />
       <Search />
+      <Categories />
     </>
   );
 }
