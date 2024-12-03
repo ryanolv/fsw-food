@@ -4,7 +4,7 @@ import { Input } from "./ui/input";
 
 const Search = () => {
   return (
-    <div className="flex justify-center px-5 py-6 gap-2">
+    <div className="flex justify-center px-5 gap-2">
       <Input
         placeholder="Buscar restaurantes"
         className="border-none bg-[#7E8392]/5"
