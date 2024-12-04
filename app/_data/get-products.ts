@@ -30,3 +30,28 @@ export const getProducts = async (): Promise<productDTO[]> => {
     restaurant: product.restaurant.name,
   }));
 };
+
+export const getUniqueProduct = async (id: string): Promise<productDTO> => {
+  const product = await db.product.findUnique({
+    where: { id },
+    select: {
+      id: true,
+      name: true,
+      imageUrl: true,
+      price: true,
+      discountPercentage: true,
+      restaurant: {
+        select: { name: true },
+      },
+    },
+  });
+  if (!product) {
+    throw new Error("Product not found");
+  }
+
+  return {
+    ...product,
+    price: Number(product.price),
+    restaurant: product.restaurant.name,
+  };
+};
