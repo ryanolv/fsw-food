@@ -11,9 +11,22 @@ export default function Home() {
       <Search />
       <Categories />
       <div className="flex justify-center">
-        <Image src="/Banner-Pizza.png" alt="Banner" width={390} height={150} />
+        <Image
+          src="/Banner-Pizza.png"
+          alt="Banner Pizza"
+          width={390}
+          height={150}
+        />
       </div>
       <ProductList />
+      <div className="flex justify-center">
+        <Image
+          src="/Banner-Burguer.png"
+          alt="Banner Burger"
+          width={390}
+          height={150}
+        />
+      </div>
     </div>
   );
 }
