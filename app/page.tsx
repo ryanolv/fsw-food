@@ -3,6 +3,7 @@ import Categories from "./_components/categories";
 import Header from "./_components/header";
 import Search from "./_components/search";
 import ProductList from "./_components/product-list";
+import RestaurantsList from "./_components/restaurants-list";
 
 export default function Home() {
   return (
@@ -27,6 +28,7 @@ export default function Home() {
           height={150}
         />
       </div>
+      <RestaurantsList />
     </div>
   );
 }
