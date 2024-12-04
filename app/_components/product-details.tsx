@@ -35,7 +35,9 @@ const ProductDetails = ({ product }: ProductDetailsProps) => {
               {formatPrice(product.price)}
             </h3>
           </div>
-          <p className="text-xs text-muted-foreground">{product.restaurant}</p>
+          <p className="text-xs text-muted-foreground">
+            {product.restaurant.name}
+          </p>
         </div>
       </div>
     </Link>

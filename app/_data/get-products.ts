@@ -1,12 +1,14 @@
+import { Restaurant } from "@prisma/client";
 import { db } from "../_lib/prisma";
 
 export interface productDTO {
   id: string;
   name: string;
   imageUrl: string;
+  description: string;
   price: number;
   discountPercentage: number;
-  restaurant: string;
+  restaurant: Restaurant;
 }
 
 export const getProducts = async (): Promise<productDTO[]> => {
@@ -15,19 +17,17 @@ export const getProducts = async (): Promise<productDTO[]> => {
     select: {
       id: true,
       name: true,
+      description: true,
       imageUrl: true,
       price: true,
       discountPercentage: true,
-      restaurant: {
-        select: { name: true },
-      },
+      restaurant: true,
     },
   });
 
   return products.map((product) => ({
     ...product,
     price: Number(product.price),
-    restaurant: product.restaurant.name,
   }));
 };
 
@@ -38,11 +38,10 @@ export const getUniqueProduct = async (id: string): Promise<productDTO> => {
       id: true,
       name: true,
       imageUrl: true,
+      description: true,
       price: true,
       discountPercentage: true,
-      restaurant: {
-        select: { name: true },
-      },
+      restaurant: true,
     },
   });
   if (!product) {
@@ -52,6 +51,5 @@ export const getUniqueProduct = async (id: string): Promise<productDTO> => {
   return {
     ...product,
     price: Number(product.price),
-    restaurant: product.restaurant.name,
   };
 };
