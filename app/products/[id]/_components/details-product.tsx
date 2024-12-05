@@ -1,6 +1,6 @@
 import ProductDetails from "@/app/_components/product-details";
 import { productDTO } from "@/app/_data/get-products";
-import DetailsDelivery from "./details-delivery";
+import DetailsDelivery from "@/app/_components/details-delivery";
 import PriceProduct from "./price-product";
 import NameProduct from "./name-product";
 import { Button } from "@/app/_components/ui/button";
@@ -18,7 +18,7 @@ const DetailsProduct = ({
     <div className="p-5 relative z-50 mt-[-1.5rem] rounded-tr-3xl rounded-tl-3xl space-y-5 bg-white">
       <NameProduct product={product} />
       <PriceProduct product={product} />
-      <DetailsDelivery product={product} />
+      <DetailsDelivery restaurant={product.restaurant} />
       <div>
         <h3 className="font-semibold">Sobre</h3>
         <p className="text-sm text-muted-foreground">{product.description}</p>
