@@ -53,3 +53,31 @@ export const getUniqueProduct = async (id: string): Promise<productDTO> => {
     price: Number(product.price),
   };
 };
+
+export const getEspecificProducts = async (
+  restaurantId: string,
+  category: string,
+): Promise<productDTO[]> => {
+  const products = await db.product.findMany({
+    where: {
+      restaurantId,
+      category: {
+        name: category,
+      },
+    },
+    select: {
+      id: true,
+      name: true,
+      description: true,
+      imageUrl: true,
+      price: true,
+      discountPercentage: true,
+      restaurant: true,
+    },
+  });
+
+  return products.map((product) => ({
+    ...product,
+    price: Number(product.price),
+  }));
+};
