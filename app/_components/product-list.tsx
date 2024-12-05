@@ -2,6 +2,7 @@ import { ChevronRight } from "lucide-react";
 import { getProducts } from "../_data/get-products";
 import ProductDetails from "./product-details";
 import { Button } from "./ui/button";
+import Link from "next/link";
 
 const ProductList = async () => {
   const products = await getProducts();
@@ -13,9 +14,12 @@ const ProductList = async () => {
         <Button
           variant="ghost"
           className="text-xs text-primary gap-[1px] h-fit py-0"
+          asChild
         >
-          Ver todos
-          <ChevronRight size={16} />
+          <Link href="/products">
+            Ver todos
+            <ChevronRight size={16} />
+          </Link>
         </Button>
       </div>
       <div className="flex gap-2 no-scrollbar overflow-x-auto pl-5">
