@@ -1,11 +1,11 @@
 import Image from "next/image";
-import { productDTO } from "../_data/get-products";
+import { ProductDTO } from "../_data/get-products";
 import { calculateFinalPrice, formatPrice } from "../_helpers/prices";
 import Link from "next/link";
 import DiscountBadge from "./discount-badge";
 
 interface ProductDetailsProps {
-  product: productDTO;
+  product: ProductDTO;
 }
 
 const ProductDetails = ({ product }: ProductDetailsProps) => {
