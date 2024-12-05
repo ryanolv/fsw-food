@@ -1,8 +1,8 @@
 import Image from "next/image";
 import { productDTO } from "../_data/get-products";
-import { Badge } from "./ui/badge";
 import { calculateFinalPrice, formatPrice } from "../_helpers/prices";
 import Link from "next/link";
+import DiscountBadge from "./discount-badge";
 
 interface ProductDetailsProps {
   product: productDTO;
@@ -20,9 +20,7 @@ const ProductDetails = ({ product }: ProductDetailsProps) => {
             className="rounded-xl object-cover"
           />
           {product.discountPercentage > 0 && (
-            <Badge className="absolute top-2 right-2 ">
-              {product.discountPercentage}% OFF
-            </Badge>
+            <DiscountBadge product={product} isAbsolute={true} />
           )}
         </div>
         <div>
