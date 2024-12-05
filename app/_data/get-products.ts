@@ -11,9 +11,11 @@ export interface productDTO {
   restaurant: Restaurant;
 }
 
-export const getProducts = async (): Promise<productDTO[]> => {
+export const getProducts = async (
+  quantity: number = 5,
+): Promise<productDTO[]> => {
   const products = await db.product.findMany({
-    take: 5,
+    take: quantity,
     select: {
       id: true,
       name: true,
