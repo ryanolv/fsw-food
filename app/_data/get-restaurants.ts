@@ -8,7 +8,7 @@ export interface RestaurantDTO {
   imageUrl: string;
   deliveryFee: Decimal;
   deliveryTimeMinutes: number;
-  categories: Category[];
+  categories?: Category[];
 }
 
 export const getRestaurants = async (): Promise<RestaurantDTO[]> => {
