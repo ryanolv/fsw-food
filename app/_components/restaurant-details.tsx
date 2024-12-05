@@ -17,8 +17,8 @@ const RestaurantDetails = ({ restaurant }: RestaurantDetailsProps) => {
   const [isFavorite, setIsFavorite] = useState(false);
 
   return (
-    <Link className="min-w-[266px]" href={`/restaurants/${restaurant.id}`}>
-      <div>
+    <div className="min-w-[266px]">
+      <Link href={`/restaurants/${restaurant.id}`}>
         <div className="relative min-h-[150px]">
           <Image
             src={restaurant.imageUrl}
@@ -52,8 +52,8 @@ const RestaurantDetails = ({ restaurant }: RestaurantDetailsProps) => {
             </p>
           </div>
         </div>
-      </div>
-    </Link>
+      </Link>
+    </div>
   );
 };
 
