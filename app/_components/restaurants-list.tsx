@@ -2,6 +2,7 @@ import { ChevronRight } from "lucide-react";
 import { Button } from "./ui/button";
 import { getRestaurants } from "../_data/get-restaurants";
 import RestaurantDetails from "./restaurant-details";
+import Link from "next/link";
 
 const RestaurantsList = async () => {
   const restaurants = await getRestaurants();
@@ -13,9 +14,12 @@ const RestaurantsList = async () => {
         <Button
           variant="ghost"
           className="text-xs text-primary gap-[1px] h-fit py-0"
+          asChild
         >
-          Ver todos
-          <ChevronRight size={16} />
+          <Link href="/restaurants">
+            Ver todos
+            <ChevronRight size={16} />
+          </Link>
         </Button>
       </div>
       <div className="flex gap-2 no-scrollbar overflow-x-auto pl-5">
