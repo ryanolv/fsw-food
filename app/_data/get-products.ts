@@ -1,7 +1,7 @@
 import { Restaurant } from "@prisma/client";
 import { db } from "../_lib/prisma";
 
-export interface productDTO {
+export interface ProductDTO {
   id: string;
   name: string;
   imageUrl: string;
@@ -13,7 +13,7 @@ export interface productDTO {
 
 export const getProducts = async (
   quantity: number = 5,
-): Promise<productDTO[]> => {
+): Promise<ProductDTO[]> => {
   const products = await db.product.findMany({
     take: quantity,
     select: {
@@ -33,7 +33,7 @@ export const getProducts = async (
   }));
 };
 
-export const getUniqueProduct = async (id: string): Promise<productDTO> => {
+export const getUniqueProduct = async (id: string): Promise<ProductDTO> => {
   const product = await db.product.findUnique({
     where: { id },
     select: {
@@ -57,15 +57,39 @@ export const getUniqueProduct = async (id: string): Promise<productDTO> => {
 };
 
 export const getEspecificProducts = async (
-  restaurantId: string,
+  restaurantId: string = "",
   category: string,
-): Promise<productDTO[]> => {
+): Promise<ProductDTO[]> => {
   const products = await db.product.findMany({
     where: {
       restaurantId,
       category: {
         name: category,
       },
+    },
+    select: {
+      id: true,
+      name: true,
+      description: true,
+      imageUrl: true,
+      price: true,
+      discountPercentage: true,
+      restaurant: true,
+    },
+  });
+
+  return products.map((product) => ({
+    ...product,
+    price: Number(product.price),
+  }));
+};
+
+export const getProductsByCategory = async (
+  categoryId: string,
+): Promise<ProductDTO[]> => {
+  const products = await db.product.findMany({
+    where: {
+      categoryId,
     },
     select: {
       id: true,
