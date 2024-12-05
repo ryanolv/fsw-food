@@ -3,6 +3,7 @@ import { productDTO } from "@/app/_data/get-products";
 import DetailsDelivery from "./details-delivery";
 import PriceProduct from "./price-product";
 import NameProduct from "./name-product";
+import { Button } from "@/app/_components/ui/button";
 
 interface ProductDetailsProps {
   product: productDTO;
@@ -14,7 +15,7 @@ const DetailsProduct = ({
   aditionalProducts,
 }: ProductDetailsProps) => {
   return (
-    <div className="p-5 space-y-5 bg-white">
+    <div className="p-5 relative z-50 mt-[-1.5rem] rounded-tr-3xl rounded-tl-3xl space-y-5 bg-white">
       <NameProduct product={product} />
       <PriceProduct product={product} />
       <DetailsDelivery product={product} />
@@ -30,6 +31,7 @@ const DetailsProduct = ({
           ))}
         </div>
       </div>
+      <Button className="w-full">Adicionar ao carrinho</Button>
     </div>
   );
 };
