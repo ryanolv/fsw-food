@@ -1,8 +1,8 @@
 import { Avatar, AvatarImage } from "@/app/_components/ui/avatar";
-import { productDTO } from "@/app/_data/get-products";
+import { ProductDTO } from "@/app/_data/get-products";
 
 interface NameProductProps {
-  product: productDTO;
+  product: ProductDTO;
 }
 
 const NameProduct = ({ product }: NameProductProps) => {

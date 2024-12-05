@@ -2,13 +2,13 @@
 
 import DiscountBadge from "@/app/_components/discount-badge";
 import { Button } from "@/app/_components/ui/button";
-import { productDTO } from "@/app/_data/get-products";
+import { ProductDTO } from "@/app/_data/get-products";
 import { calculateFinalPrice, formatPrice } from "@/app/_helpers/prices";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useState } from "react";
 
 interface PriceProductProps {
-  product: productDTO;
+  product: ProductDTO;
 }
 
 const PriceProduct = ({ product }: PriceProductProps) => {

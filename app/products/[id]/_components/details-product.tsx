@@ -1,13 +1,13 @@
 import ProductDetails from "@/app/_components/product-details";
-import { productDTO } from "@/app/_data/get-products";
+import { ProductDTO } from "@/app/_data/get-products";
 import DetailsDelivery from "@/app/_components/details-delivery";
 import PriceProduct from "./price-product";
 import NameProduct from "./name-product";
 import { Button } from "@/app/_components/ui/button";
 
 interface ProductDetailsProps {
-  product: productDTO;
-  aditionalProducts: productDTO[];
+  product: ProductDTO;
+  aditionalProducts: ProductDTO[];
 }
 
 const DetailsProduct = ({

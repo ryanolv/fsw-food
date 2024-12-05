@@ -1,8 +1,8 @@
 import { Card, CardContent } from "@/app/_components/ui/card";
-import { productDTO } from "@/app/_data/get-products";
+import { ProductDTO } from "@/app/_data/get-products";
 
 interface DetailsDeliveryProps {
-  product: productDTO;
+  product: ProductDTO;
 }
 
 const DetailsDelivery = ({ product }: DetailsDeliveryProps) => {
