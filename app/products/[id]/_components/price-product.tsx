@@ -13,8 +13,11 @@ interface PriceProductProps {
 
 const PriceProduct = ({ product }: PriceProductProps) => {
   const [quantity, setQuantity] = useState(1);
-  const handleIncrement = () => setQuantity((prev) => prev + 1);
-  const handleDecrement = () => setQuantity((prev) => Math.max(prev - 1, 1));
+
+  const handleIncreaseQuantity = () => setQuantity((prev) => prev + 1);
+  const handleDecreaseQuantity = () =>
+    setQuantity((prev) => Math.max(1, prev - 1));
+
   return (
     <div className="flex justify-between">
       <div>
@@ -36,12 +39,12 @@ const PriceProduct = ({ product }: PriceProductProps) => {
         <Button
           variant="outline"
           className="border-gray-300 h-10 w-10"
-          onClick={handleDecrement}
+          onClick={handleDecreaseQuantity}
         >
           <ChevronLeft />
         </Button>
         <span className="text-sm">{quantity}</span>
-        <Button className="h-9 w-9" onClick={handleIncrement}>
+        <Button className="h-9 w-9" onClick={handleIncreaseQuantity}>
           <ChevronRight />
         </Button>
       </div>
