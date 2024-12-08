@@ -13,6 +13,7 @@ export interface ICartContext {
   discounts: number;
   totalProducts: number;
   addProductToCart: (product: ProductDTO, quantity: number) => void;
+  clearCartAndAddProduct: (product: ProductDTO, quantity: number) => void;
   removeProductFromCart: (product: ProductDTO) => void;
   incrementQuantityToProduct: (product: ProductDTO) => void;
   decrementQuantityToProduct: (product: ProductDTO) => void;
@@ -24,6 +25,7 @@ export const CartContext = createContext<ICartContext>({
   discounts: 0,
   totalProducts: 0,
   addProductToCart: () => {},
+  clearCartAndAddProduct: () => {},
   removeProductFromCart: () => {},
   incrementQuantityToProduct: () => {},
   decrementQuantityToProduct: () => {},
@@ -50,6 +52,12 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
   );
 
   const addProductToCart = (product: ProductDTO, quantity: number) => {
+    const productFromOtherRestaurant = products.some(
+      (p) => p.restaurant.id !== product.restaurant.id,
+    );
+    if (productFromOtherRestaurant) {
+      throw new Error("You can't add products from other restaurants");
+    }
     const productAlraedyInCart = products.some((p) => p.id === product.id);
     if (productAlraedyInCart) {
       return setProducts((prev) =>
@@ -59,6 +67,10 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
       );
     }
     setProducts((prev) => [...prev, { ...product, quantity }]);
+  };
+
+  const clearCartAndAddProduct = (product: ProductDTO, quantity: number) => {
+    setProducts([{ ...product, quantity }]);
   };
 
   const removeProductFromCart = (product: ProductDTO) => {
@@ -91,6 +103,7 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
         discounts,
         totalProducts,
         addProductToCart,
+        clearCartAndAddProduct,
         removeProductFromCart,
         incrementQuantityToProduct,
         decrementQuantityToProduct,
