@@ -1,5 +1,6 @@
 import { Card, CardContent } from "@/app/_components/ui/card";
 import { RestaurantDTO } from "../_data/get-restaurants";
+import { formatPrice } from "../_helpers/prices";
 
 interface DetailsDeliveryProps {
   restaurant: RestaurantDTO;
@@ -14,7 +15,7 @@ const DetailsDelivery = ({ restaurant }: DetailsDeliveryProps) => {
           <p className="text-sm font-semibold">
             {Number(restaurant.deliveryFee) === 0
               ? "Grátis"
-              : `R$ ${restaurant.deliveryFee}`}
+              : formatPrice(Number(restaurant.deliveryFee))}
           </p>
         </div>
         <div>
