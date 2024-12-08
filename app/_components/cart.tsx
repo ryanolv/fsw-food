@@ -7,10 +7,15 @@ import { Separator } from "./ui/separator";
 import { CartContext } from "../_contexts/cart-context";
 import CartItem from "./cart-item";
 import { formatPrice } from "../_helpers/prices";
+import { RestaurantDTO } from "../_data/get-restaurants";
 
-const Cart = () => {
+interface CartProps {
+  restaurant: RestaurantDTO;
+}
+
+const Cart = ({ restaurant }: CartProps) => {
   const { products, subtotal, discounts } = useContext(CartContext);
-  const deliveryFeeRestaurant = Number(products[0].restaurant.deliveryFee);
+  const deliveryFeeRestaurant = Number(restaurant.deliveryFee);
   const totalPrice = subtotal + deliveryFeeRestaurant - discounts;
   return (
     <div className="grid grid-rows-12 h-full">

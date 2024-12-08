@@ -11,6 +11,7 @@ export interface ICartContext {
   products: IProductCart[];
   subtotal: number;
   discounts: number;
+  totalProducts: number;
   addProductToCart: (product: ProductDTO, quantity: number) => void;
   removeProductFromCart: (product: ProductDTO) => void;
   incrementQuantityToProduct: (product: ProductDTO) => void;
@@ -21,6 +22,7 @@ export const CartContext = createContext<ICartContext>({
   products: [],
   subtotal: 0,
   discounts: 0,
+  totalProducts: 0,
   addProductToCart: () => {},
   removeProductFromCart: () => {},
   incrementQuantityToProduct: () => {},
@@ -39,6 +41,11 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
     (acc, product) =>
       acc +
       (product.price * product.quantity * product.discountPercentage) / 100,
+    0,
+  );
+
+  const totalProducts = products.reduce(
+    (acc, product) => acc + product.quantity,
     0,
   );
 
@@ -82,6 +89,7 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
         products,
         subtotal,
         discounts,
+        totalProducts,
         addProductToCart,
         removeProductFromCart,
         incrementQuantityToProduct,

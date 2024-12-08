@@ -25,7 +25,7 @@ const AddToCartButton = ({ product, quantity }: AddToCartButtonProps) => {
         </Button>
       </SheetTrigger>
       <SheetContent className="w-[90%]">
-        <Cart />
+        <Cart restaurant={product.restaurant} />
       </SheetContent>
     </Sheet>
   );

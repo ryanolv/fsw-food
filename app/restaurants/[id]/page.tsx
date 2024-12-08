@@ -1,6 +1,7 @@
 import { getEspecificRestaurant } from "@/app/_data/get-restaurants";
 import ImageRestaurant from "./_components/image-restaurant";
 import DetailsRestaurant from "./_components/details-restaurant";
+import CartSummary from "./_components/cart-summary";
 
 interface RestaurantPageProps {
   params: {
@@ -11,10 +12,11 @@ interface RestaurantPageProps {
 const RestaurantPage = async ({ params: { id } }: RestaurantPageProps) => {
   const restaurant = await getEspecificRestaurant(id);
   return (
-    <div>
+    <>
       <ImageRestaurant restaurant={restaurant} />
       <DetailsRestaurant restaurant={restaurant} />
-    </div>
+      <CartSummary restaurant={restaurant} />
+    </>
   );
 };
 
