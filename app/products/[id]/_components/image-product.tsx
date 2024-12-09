@@ -2,7 +2,7 @@
 
 import { Button } from "@/app/_components/ui/button";
 import { Product } from "@prisma/client";
-import { ChevronLeft } from "lucide-react";
+import { ChevronLeft, X } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
@@ -26,6 +26,13 @@ const ImageProduct = ({ product }: ImageProductProps) => {
         onClick={() => router.back()}
       >
         <ChevronLeft size={24} className="text-black" />
+      </Button>
+      <Button
+        variant="ghost"
+        className="absolute top-4 right-4 rounded-xl w-10 h-10 bg-black/40"
+        onClick={() => router.push("/")}
+      >
+        <X size={24} className="text-white" />
       </Button>
     </div>
   );
