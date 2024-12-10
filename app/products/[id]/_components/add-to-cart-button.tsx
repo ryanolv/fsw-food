@@ -24,10 +24,11 @@ interface AddToCartButtonProps {
 const AddToCartButton = ({ product, quantity }: AddToCartButtonProps) => {
   const { addProductToCart, products, clearCartAndAddProduct } =
     useContext(CartContext);
+
   const productFromOtherRestaurant: boolean =
     product.restaurant.id !== products[0]?.restaurant.id;
 
-  if (productFromOtherRestaurant)
+  if (productFromOtherRestaurant && products.length > 0)
     return (
       <AlertDialog>
         <AlertDialogTrigger asChild>
