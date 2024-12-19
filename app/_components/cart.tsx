@@ -1,6 +1,6 @@
 "use client";
 
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Button } from "./ui/button";
 import { Card, CardContent } from "./ui/card";
 import { Separator } from "./ui/separator";
@@ -8,25 +8,68 @@ import { CartContext } from "../_contexts/cart-context";
 import CartItem from "./cart-item";
 import { formatPrice } from "../_helpers/prices";
 import { RestaurantDTO } from "../_data/get-restaurants";
+import { createOrder } from "../_actions/create-order";
+import { useSession } from "next-auth/react";
+import { v4 as uuidv4 } from "uuid";
+import { Loader2 } from "lucide-react";
+import { OrderStatus } from "@prisma/client";
 
 interface CartProps {
   restaurant: RestaurantDTO;
 }
 
 const Cart = ({ restaurant }: CartProps) => {
-  const { products, subtotal, discounts } = useContext(CartContext);
+  const { data } = useSession();
+  const { products, subtotal, discounts, clearCart } = useContext(CartContext);
   const deliveryFeeRestaurant = Number(restaurant.deliveryFee);
   const totalPrice = subtotal + deliveryFeeRestaurant - discounts;
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleFinishOrderClick = async () => {
+    if (!data?.user) return;
+
+    try {
+      setIsSubmitting(true);
+      await createOrder({
+        id: uuidv4(),
+        totalPrice: totalPrice,
+        subtotal: subtotal,
+        discounts: discounts,
+        status: OrderStatus.PENDING,
+        restauranst: {
+          connect: { id: restaurant.id },
+        },
+        user: {
+          connect: { id: data?.user.id },
+        },
+        deliveryFee: deliveryFeeRestaurant,
+        deliveryTimeMinutes: restaurant.deliveryTimeMinutes,
+        productsOrder: {
+          createMany: {
+            data: products.map((product) => ({
+              quantity: product.quantity,
+              productId: product.id,
+            })),
+          },
+        },
+      });
+
+      clearCart();
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <div className="grid grid-rows-12 h-full">
       <h1 className="text-lg font-semibold row-span-1">Sacola</h1>
-      {/* ITEMS */}
       <div className="row-span-7 space-y-5 flex-shrink-0 overflow-auto">
         {products.map((product) => (
           <CartItem key={product.id} productCart={product} />
         ))}
       </div>
-      {/* RESUME */}
       <div className="space-y-6 row-span-4 flex justify-end flex-col">
         <Card className="border-gray-200 ">
           <CardContent className="space-y-2 py-5">
@@ -56,7 +99,14 @@ const Cart = ({ restaurant }: CartProps) => {
             </div>
           </CardContent>
         </Card>
-        <Button className="w-full">Finalizar compra</Button>
+        <Button
+          className="w-full"
+          onClick={handleFinishOrderClick}
+          disabled={isSubmitting}
+        >
+          {isSubmitting && <Loader2 className="animate-spin" />}
+          Finalizar compra
+        </Button>
       </div>
     </div>
   );

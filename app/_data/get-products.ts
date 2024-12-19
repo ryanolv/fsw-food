@@ -1,14 +1,10 @@
-import { Restaurant } from "@prisma/client";
+import { Product } from "@prisma/client";
 import { db } from "../_lib/prisma";
+import { RestaurantDTO } from "./get-restaurants";
 
-export interface ProductDTO {
-  id: string;
-  name: string;
-  imageUrl: string;
-  description: string;
+export interface ProductDTO extends Omit<Product, "price"> {
   price: number;
-  discountPercentage: number;
-  restaurant: Restaurant;
+  restaurant: RestaurantDTO;
 }
 
 export const getProducts = async (
@@ -24,6 +20,7 @@ export const getProducts = async (
       price: true,
       discountPercentage: true,
       restaurant: true,
+      categoryId: true,
     },
   });
 
@@ -44,6 +41,7 @@ export const getUniqueProduct = async (id: string): Promise<ProductDTO> => {
       price: true,
       discountPercentage: true,
       restaurant: true,
+      categoryId: true,
     },
   });
   if (!product) {
@@ -75,6 +73,7 @@ export const getEspecificProducts = async (
       price: true,
       discountPercentage: true,
       restaurant: true,
+      categoryId: true,
     },
   });
 
@@ -99,6 +98,7 @@ export const getProductsByCategory = async (
       price: true,
       discountPercentage: true,
       restaurant: true,
+      categoryId: true,
     },
   });
 

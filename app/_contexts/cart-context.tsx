@@ -13,6 +13,7 @@ export interface ICartContext {
   discounts: number;
   totalProducts: number;
   addProductToCart: (product: ProductDTO, quantity: number) => void;
+  clearCart: () => void;
   clearCartAndAddProduct: (product: ProductDTO, quantity: number) => void;
   removeProductFromCart: (product: ProductDTO) => void;
   incrementQuantityToProduct: (product: ProductDTO) => void;
@@ -25,6 +26,7 @@ export const CartContext = createContext<ICartContext>({
   discounts: 0,
   totalProducts: 0,
   addProductToCart: () => {},
+  clearCart: () => {},
   clearCartAndAddProduct: () => {},
   removeProductFromCart: () => {},
   incrementQuantityToProduct: () => {},
@@ -69,6 +71,10 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
     setProducts((prev) => [...prev, { ...product, quantity }]);
   };
 
+  const clearCart = () => {
+    setProducts([]);
+  };
+
   const clearCartAndAddProduct = (product: ProductDTO, quantity: number) => {
     setProducts([{ ...product, quantity }]);
   };
@@ -103,6 +109,7 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
         discounts,
         totalProducts,
         addProductToCart,
+        clearCart,
         clearCartAndAddProduct,
         removeProductFromCart,
         incrementQuantityToProduct,
