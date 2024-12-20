@@ -62,7 +62,7 @@ model Order {
   discounts           Decimal        @db.Decimal(10, 2)
   status              OrderStatus
   restaurantId        String
-  restauranst         Restaurant     @relation(fields: [restaurantId], references: [id])
+  restaurant          Restaurant     @relation(fields: [restaurantId], references: [id])
   productsOrder       ProductOrder[]
   userId              String
   user                User           @relation(fields: [userId], references: [id])

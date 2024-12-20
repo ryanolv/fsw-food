@@ -36,7 +36,7 @@ const Cart = ({ restaurant }: CartProps) => {
         subtotal: subtotal,
         discounts: discounts,
         status: OrderStatus.PENDING,
-        restauranst: {
+        restaurant: {
           connect: { id: restaurant.id },
         },
         user: {
