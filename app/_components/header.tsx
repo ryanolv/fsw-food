@@ -21,10 +21,12 @@ import {
 import { Separator } from "./ui/separator";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+import { usePathname } from "next/navigation";
 
 const Header = () => {
   const { data, status } = useSession();
   const user = data?.user;
+  const pathname = usePathname();
   return (
     <div className="flex justify-between px-5 pt-6">
       <Link href="/">
@@ -65,18 +67,31 @@ const Header = () => {
 
           <Separator />
 
-          <div className="flex flex-col justify-start my-6">
-            <Button variant="ghost" className="flex justify-start">
-              <HomeIcon />
-              Início
+          <div className={`flex flex-col justify-start my-6 `}>
+            <Button
+              variant="ghost"
+              className={`flex justify-start ${pathname === "/" ? "bg-primary text-white" : ""}`}
+              asChild
+            >
+              <Link href="/">
+                <HomeIcon />
+                Início
+              </Link>
             </Button>
-            <Button variant="ghost" className="flex justify-start" asChild>
+            <Button
+              variant="ghost"
+              className={`flex justify-start ${pathname === "/orders" ? "bg-primary text-white" : ""}`}
+              asChild
+            >
               <Link href="/orders">
                 <ScrollText />
                 Meus Pedidos
               </Link>
             </Button>
-            <Button variant="ghost" className="flex justify-start">
+            <Button
+              variant="ghost"
+              className={`flex justify-start ${pathname === "/favorites" ? "bg-primary text-white" : ""}`}
+            >
               <HeartIcon />
               Restaurantes Favoritos
             </Button>
