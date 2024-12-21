@@ -70,9 +70,11 @@ const Header = () => {
               <HomeIcon />
               Início
             </Button>
-            <Button variant="ghost" className="flex justify-start">
-              <ScrollText />
-              Meus Pedidos
+            <Button variant="ghost" className="flex justify-start" asChild>
+              <Link href="/orders">
+                <ScrollText />
+                Meus Pedidos
+              </Link>
             </Button>
             <Button variant="ghost" className="flex justify-start">
               <HeartIcon />
