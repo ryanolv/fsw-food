@@ -4,11 +4,11 @@ import { calculateFinalPrice, formatPrice } from "../_helpers/prices";
 import Link from "next/link";
 import DiscountBadge from "./discount-badge";
 
-interface ProductDetailsProps {
+interface ProductItemProps {
   product: ProductDTO;
 }
 
-const ProductDetails = ({ product }: ProductDetailsProps) => {
+const ProductItem = ({ product }: ProductItemProps) => {
   return (
     <Link className="min-w-36" href={`../products/${product.id}`}>
       <div className="w-full">
@@ -42,4 +42,4 @@ const ProductDetails = ({ product }: ProductDetailsProps) => {
   );
 };
 
-export default ProductDetails;
+export default ProductItem;

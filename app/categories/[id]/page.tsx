@@ -1,5 +1,5 @@
 import Header from "@/app/_components/header";
-import ProductDetails from "@/app/_components/product-details";
+import ProductItem from "@/app/_components/product-item";
 import { getProductsByCategory } from "@/app/_data/get-products";
 import { db } from "@/app/_lib/prisma";
 
@@ -19,7 +19,7 @@ const CategoryPage = async ({ params: { id } }: CategoryPageProps) => {
         <h1 className="font-semibold text-lg">{category?.name}</h1>
         <div className="grid grid-cols-2 gap-4">
           {products.map((product) => (
-            <ProductDetails key={product.id} product={product} />
+            <ProductItem key={product.id} product={product} />
           ))}
         </div>
       </div>

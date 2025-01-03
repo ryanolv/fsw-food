@@ -1,6 +1,6 @@
 import { ChevronRight } from "lucide-react";
 import { getProducts } from "../_data/get-products";
-import ProductDetails from "./product-details";
+import ProductItem from "./product-item";
 import { Button } from "./ui/button";
 import Link from "next/link";
 
@@ -24,7 +24,7 @@ const ProductList = async () => {
       </div>
       <div className="flex gap-2 no-scrollbar overflow-x-auto pl-5">
         {products.map((product) => (
-          <ProductDetails key={product.id} product={product} />
+          <ProductItem key={product.id} product={product} />
         ))}
       </div>
     </div>

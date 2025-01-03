@@ -1,5 +1,5 @@
 import Header from "../_components/header";
-import ProductDetails from "../_components/product-details";
+import ProductItem from "../_components/product-item";
 import { getProducts } from "../_data/get-products";
 
 const RecommendedProductsPage = async () => {
@@ -11,7 +11,7 @@ const RecommendedProductsPage = async () => {
         <h1 className="font-semibold text-lg">Pedidos Recomendados</h1>
         <div className="grid grid-cols-2 gap-4">
           {products.map((product) => (
-            <ProductDetails key={product.id} product={product} />
+            <ProductItem key={product.id} product={product} />
           ))}
         </div>
       </div>
