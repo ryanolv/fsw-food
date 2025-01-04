@@ -2,7 +2,7 @@ import { Product } from "@prisma/client";
 import { db } from "../_lib/prisma";
 import { RestaurantDTO } from "./get-restaurants";
 
-export interface ProductDTO extends Omit<Product, "price"> {
+export interface ProductDTO extends Omit<Product, "price" | "restaurantId"> {
   price: number;
   restaurant: RestaurantDTO;
 }
@@ -27,6 +27,10 @@ export const getProducts = async (
   return products.map((product) => ({
     ...product,
     price: Number(product.price),
+    restaurant: {
+      ...product.restaurant,
+      deliveryFee: Number(product.restaurant.deliveryFee),
+    },
   }));
 };
 
@@ -51,6 +55,10 @@ export const getUniqueProduct = async (id: string): Promise<ProductDTO> => {
   return {
     ...product,
     price: Number(product.price),
+    restaurant: {
+      ...product.restaurant,
+      deliveryFee: Number(product.restaurant.deliveryFee),
+    },
   };
 };
 
@@ -80,6 +88,10 @@ export const getEspecificProducts = async (
   return products.map((product) => ({
     ...product,
     price: Number(product.price),
+    restaurant: {
+      ...product.restaurant,
+      deliveryFee: Number(product.restaurant.deliveryFee),
+    },
   }));
 };
 
@@ -105,5 +117,9 @@ export const getProductsByCategory = async (
   return products.map((product) => ({
     ...product,
     price: Number(product.price),
+    restaurant: {
+      ...product.restaurant,
+      deliveryFee: Number(product.restaurant.deliveryFee),
+    },
   }));
 };
