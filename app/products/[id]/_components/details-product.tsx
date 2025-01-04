@@ -1,9 +1,7 @@
 "use client";
 
-import ProductItem from "@/app/_components/product-item";
 import { ProductDTO } from "@/app/_data/get-products";
 import DetailsDelivery from "@/app/_components/details-delivery";
-// import PriceProduct from "./price-product";
 import NameProduct from "./name-product";
 import AddToCartButton from "./add-to-cart-button";
 import DiscountBadge from "@/app/_components/discount-badge";
@@ -11,6 +9,8 @@ import { calculateFinalPrice, formatPrice } from "@/app/_helpers/prices";
 import { Button } from "@/app/_components/ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useState } from "react";
+import AboutProduct from "./about-product";
+import ExtraProducts from "./extra-products";
 
 interface ProductDetailsProps {
   product: ProductDTO;
@@ -59,20 +59,9 @@ const DetailsProduct = ({
           </Button>
         </div>
       </div>
-      {/* <PriceProduct product={product} /> */}
       <DetailsDelivery restaurant={product.restaurant} />
-      <div>
-        <h3 className="font-semibold">Sobre</h3>
-        <p className="text-sm text-muted-foreground">{product.description}</p>
-      </div>
-      <div>
-        <h3 className="font-semibold">Sucos</h3>
-        <div className="flex gap-2 no-scrollbar overflow-x-auto pl-5">
-          {aditionalProducts.map((product) => (
-            <ProductItem key={product.id} product={product} />
-          ))}
-        </div>
-      </div>
+      <AboutProduct description={product.description} />
+      <ExtraProducts aditionalProducts={aditionalProducts} />
       <AddToCartButton product={product} quantity={quantity} />
     </div>
   );
