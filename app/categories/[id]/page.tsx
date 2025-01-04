@@ -1,7 +1,7 @@
 import Header from "@/app/_components/header";
 import ProductItem from "@/app/_components/product-item";
+import { getCategory } from "@/app/_data/get-category";
 import { getProductsByCategory } from "@/app/_data/get-products";
-import { db } from "@/app/_lib/prisma";
 
 interface CategoryPageProps {
   params: {
@@ -11,7 +11,7 @@ interface CategoryPageProps {
 
 const CategoryPage = async ({ params: { id } }: CategoryPageProps) => {
   const products = await getProductsByCategory(id);
-  const category = await db.category.findUnique({ where: { id } });
+  const category = await getCategory(id);
   return (
     <>
       <Header />
