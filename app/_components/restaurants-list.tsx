@@ -1,7 +1,7 @@
 import { ChevronRight } from "lucide-react";
 import { Button } from "./ui/button";
 import { getRestaurants } from "../_data/get-restaurants";
-import RestaurantDetails from "./restaurant-details";
+import RestaurantItem from "./restaurant-item";
 import Link from "next/link";
 
 const RestaurantsList = async () => {
@@ -24,7 +24,7 @@ const RestaurantsList = async () => {
       </div>
       <div className="flex gap-2 no-scrollbar overflow-x-auto pl-5">
         {restaurants.map((restaurant) => (
-          <RestaurantDetails key={restaurant.id} restaurant={restaurant} />
+          <RestaurantItem key={restaurant.id} restaurant={restaurant} />
         ))}
       </div>
     </div>

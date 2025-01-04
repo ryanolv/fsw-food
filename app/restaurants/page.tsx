@@ -1,6 +1,6 @@
 import Header from "@/app/_components/header";
 import { getRestaurants } from "../_data/get-restaurants";
-import RestaurantDetails from "../_components/restaurant-details";
+import RestaurantItem from "../_components/restaurant-item";
 
 const RestaurantsRecommended = async () => {
   const restaurants = await getRestaurants();
@@ -12,7 +12,7 @@ const RestaurantsRecommended = async () => {
         <h1 className="font-semibold text-lg">Restaurantes</h1>
         <div className="space-y-6">
           {restaurants.map((restaurant) => (
-            <RestaurantDetails key={restaurant.id} restaurant={restaurant} />
+            <RestaurantItem key={restaurant.id} restaurant={restaurant} />
           ))}
         </div>
       </div>

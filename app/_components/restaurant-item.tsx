@@ -9,11 +9,11 @@ import { Button } from "./ui/button";
 import { useState } from "react";
 import Link from "next/link";
 
-interface RestaurantDetailsProps {
+interface RestaurantItemProps {
   restaurant: RestaurantDTO;
 }
 
-const RestaurantDetails = ({ restaurant }: RestaurantDetailsProps) => {
+const RestaurantItem = ({ restaurant }: RestaurantItemProps) => {
   const [isFavorite, setIsFavorite] = useState(false);
 
   return (
@@ -57,4 +57,4 @@ const RestaurantDetails = ({ restaurant }: RestaurantDetailsProps) => {
   );
 };
 
-export default RestaurantDetails;
+export default RestaurantItem;
