@@ -6,7 +6,6 @@ import Link from "next/link";
 
 const RestaurantsList = async () => {
   const restaurants = await getRestaurants();
-  console.log(restaurants);
   return (
     <div className="space-y-3 pb-5">
       <div className="flex items-center justify-between font-semibold pl-5">
