@@ -1,13 +1,8 @@
-import { Decimal } from "@prisma/client/runtime/library";
 import { db } from "../_lib/prisma";
-import { Category } from "@prisma/client";
+import { Category, Restaurant } from "@prisma/client";
 
-export interface RestaurantDTO {
-  id: string;
-  name: string;
-  imageUrl: string;
-  deliveryFee: Decimal;
-  deliveryTimeMinutes: number;
+export interface RestaurantDTO extends Omit<Restaurant, "deliveryFee"> {
+  deliveryFee: number;
   categories?: Category[];
 }
 
@@ -23,7 +18,10 @@ export const getRestaurants = async (): Promise<RestaurantDTO[]> => {
       categories: true,
     },
   });
-  return restaurants;
+  return restaurants.map((restaurant) => ({
+    ...restaurant,
+    deliveryFee: Number(restaurant.deliveryFee),
+  }));
 };
 
 export const getEspecificRestaurant = async (
@@ -45,5 +43,8 @@ export const getEspecificRestaurant = async (
   if (!restaurant) {
     throw new Error("Restaurant not found");
   }
-  return restaurant;
+  return {
+    ...restaurant,
+    deliveryFee: Number(restaurant.deliveryFee),
+  };
 };
