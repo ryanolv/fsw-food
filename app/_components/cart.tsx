@@ -13,6 +13,7 @@ import { useSession } from "next-auth/react";
 import { v4 as uuidv4 } from "uuid";
 import { Loader2 } from "lucide-react";
 import { OrderStatus } from "@prisma/client";
+import { toast } from "sonner";
 
 interface CartProps {
   restaurant: RestaurantDTO;
@@ -26,7 +27,8 @@ const Cart = ({ restaurant }: CartProps) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleFinishOrderClick = async () => {
-    if (!data?.user) return;
+    if (!data?.user)
+      return toast.error("Você precisa estar logado para finalizar a compra");
 
     try {
       setIsSubmitting(true);

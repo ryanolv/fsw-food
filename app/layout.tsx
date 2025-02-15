@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { CartProvider } from "./_contexts/cart-context";
 import AuthProvider from "./_providers/auth";
+import { Toaster } from "./_components/ui/sonner";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -23,7 +24,10 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.className} antialiased bg-[#F4F4F5]`}>
         <AuthProvider>
-          <CartProvider>{children}</CartProvider>
+          <CartProvider>
+            <Toaster />
+            {children}
+          </CartProvider>
         </AuthProvider>
       </body>
     </html>
